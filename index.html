@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EAGLE STUDIO — Sledujte filmy a seriály zdarma</title>
+  <title>EAGLE STUDIO — Filmy a Seriály</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <style>
     * {
@@ -24,13 +26,13 @@
       overflow-x: hidden;
     }
 
-    /* Navigace */
+    /* --- NAVIGACE --- */
     navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 8%;
-      background: rgba(8, 12, 20, 0.7);
+      padding: 15px 8%;
+      background: rgba(8, 12, 20, 0.85);
       backdrop-filter: blur(15px);
       position: fixed;
       width: 100%;
@@ -51,6 +53,7 @@
       text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
     }
 
+    /* Tlačítko přihlášení (před přihlášením) */
     .nav-btn {
       padding: 10px 24px;
       background: #00d2ff;
@@ -68,7 +71,52 @@
       transform: translateY(-2px);
     }
 
-    /* Hero Sekce */
+    /* Profil uživatele v navigaci (po přihlášení) */
+    .user-nav-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar-circle {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #00d2ff, #0072ff);
+      color: #080c14;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.5);
+      text-transform: uppercase;
+    }
+
+    .user-name-text {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+    }
+
+    .logout-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 77, 77, 0.4);
+      color: #ff5c5c;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background: #ff4d4d;
+      color: #fff;
+    }
+
+    /* --- POHLED PRO NEPŘIHLÁŠENÉ (LANDING) --- */
     .hero {
       position: relative;
       padding: 160px 8% 80px 8%;
@@ -97,9 +145,7 @@
       margin-bottom: 20px;
     }
 
-    .hero h2 span {
-      color: #00d2ff;
-    }
+    .hero h2 span { color: #00d2ff; }
 
     .hero p {
       color: #94a3b8;
@@ -108,27 +154,8 @@
       margin-bottom: 35px;
     }
 
-    .cta-btn {
-      padding: 16px 36px;
-      background: #00d2ff;
-      color: #060911;
-      text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border-radius: 12px;
-      box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
-      transition: all 0.3s ease;
-    }
-
-    .cta-btn:hover {
-      background: #5ee2ff;
-      box-shadow: 0 0 35px rgba(0, 210, 255, 0.7);
-      transform: translateY(-3px);
-    }
-
-    /* Sekce Výhod (Grid) */
     .features {
-      padding: 60px 8%;
+      padding: 40px 8% 80px 8%;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 25px;
@@ -141,149 +168,67 @@
       border-radius: 18px;
       padding: 30px;
       text-align: center;
-      transition: transform 0.3s ease;
     }
 
-    .feature-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(0, 210, 255, 0.4);
+    .feature-card h3 { color: #00d2ff; margin: 10px 0; }
+    .feature-card p { color: #94a3b8; font-size: 0.9rem; }
+
+    /* --- POHLED PRO PŘIHLÁŠENÉ (CATALOG) --- */
+    .dashboard {
+      padding: 130px 8% 80px 8%;
     }
 
-    .feature-icon {
-      font-size: 2rem;
-      margin-bottom: 15px;
-      display: inline-block;
+    .welcome-panel {
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.15) 0%, rgba(15, 23, 42, 0.6) 100%);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 50px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
-    .feature-card h3 {
-      font-size: 1.2rem;
+    .welcome-panel h2 {
+      font-size: 2.2rem;
       margin-bottom: 10px;
+    }
+
+    .welcome-panel h2 span {
       color: #00d2ff;
+      text-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
     }
 
-    .feature-card p {
-      color: #94a3b8;
-      font-size: 0.9rem;
-      line-height: 1.5;
+    .welcome-panel p {
+      color: #cbd5e1;
+      font-size: 1rem;
     }
 
-    /* Ukázka filmů (Preview Katalog) */
-    .movies-preview {
-      padding: 60px 8%;
-    }
-
-    .movies-preview h3 {
-      font-size: 1.8rem;
-      margin-bottom: 30px;
-      text-align: center;
+    /* Filmové sekce a Karty */
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      border-left: 4px solid #00d2ff;
+      padding-left: 12px;
     }
 
     .movie-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
     }
 
     .movie-card {
       position: relative;
       background: rgba(15, 23, 42, 0.7);
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.08);
       aspect-ratio: 2 / 3;
       display: flex;
-      align-items: flex-end;
-      padding: 15px;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
       transition: all 0.3s ease;
+      cursor: pointer;
     }
-
-    .movie-card:hover {
-      border-color: #00d2ff;
-      box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
-      transform: scale(1.03);
-    }
-
-    /* Falešné obaly filmů s gradientem a textem */
-    .movie-1 { background: linear-gradient(180deg, transparent 40%, rgba(8,12,20,0.95)), #1e293b; }
-    .movie-2 { background: linear-gradient(180deg, transparent 40%, rgba(8,12,20,0.95)), #0f172a; }
-    .movie-3 { background: linear-gradient(180deg, transparent 40%, rgba(8,12,20,0.95)), #111827; }
-    .movie-4 { background: linear-gradient(180deg, transparent 40%, rgba(8,12,20,0.95)), #1e1b4b; }
-
-    .movie-title {
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 40px;
-      color: #64748b;
-      font-size: 0.85rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-  </style>
-</head>
-<body>
-
-  <navbar>
-    <div class="logo">
-      <h1>EAGLE <span>STUDIO</span></h1>
-    </div>
-    <a href="login.html" class="nav-btn">Přihlásit se</a>
-  </navbar>
-
-  <section class="hero">
-    <div class="glow-bg"></div>
-    <h2>Tisíce filmů a seriálů. <br><span>100% zdarma bez poplatků.</span></h2>
-    <p>Sledujte nejnovější trháky, klasické snímky i seriálové hity kdykoliv a kdekoliv. Stačí se zdarma zaregistrovat.</p>
-    <a href="login.html" class="cta-btn">Spustit sledování zdarma</a>
-  </section>
-
-  <section class="features">
-    <div class="feature-card">
-      <div class="feature-icon">💎</div>
-      <h3>Zcela Zdarma</h3>
-      <p>Žádné skryté poplatky ani měsíční předplatné. Vše je dostupné ihned po vytvoření účtu.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🎬</div>
-      <h3>4K Ultra HD Kvalita</h3>
-      <p>Užijte si křišťálově čistý obraz a pohlcující zvuk na jakémkoliv zařízení.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">⚡</div>
-      <h3>Bez Reklam</h3>
-      <p>Sledujte své oblíbené tituly plynule bez jakéhokoliv přerušování reklamami.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">📱</div>
-      <h3>Na Všech Zařízeních</h3>
-      <p>Přehrávejte na notebooku, telefonu, tabletu nebo chytré televizi.</p>
-    </div>
-  </section>
-
-  <section class="movies-preview">
-    <h3>Právě frčí na EAGLE STUDIO</h3>
-    <div class="movie-grid">
-      <div class="movie-card movie-1">
-        <span class="movie-title">Cyberverse 2099</span>
-      </div>
-      <div class="movie-card movie-2">
-        <span class="movie-title">Temný Horizont</span>
-      </div>
-      <div class="movie-card movie-3">
-        <span class="movie-title">Poslední Nájezdník</span>
-      </div>
-      <div class="movie-card movie-4">
-        <span class="movie-title">Ztracené Město</span>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    &copy; EAGLE STUDIO. Všechna práva vyhrazena.
-  </footer>
-
-</body>
-</html>
