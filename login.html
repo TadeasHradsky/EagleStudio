@@ -168,12 +168,25 @@
       color: #00d2ff;
     }
 
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: #00d2ff;
+    }
+
     .hidden {
       display: none !important;
     }
 
     .footer-text {
-      margin-top: 25px;
+      margin-top: 20px;
       font-size: 0.75rem;
       color: #64748b;
     }
@@ -206,6 +219,10 @@
     <div id="user-info" class="user-info hidden">
       <p>Vítejte zpět,<br><strong id="user-email"></strong></p>
       <button class="btn-secondary" onclick="netlifyIdentity.logout()">Odhlásit se</button>
+    </div>
+
+    <div>
+      <a href="index.html" class="back-link">&larr; Zpět na hlavní stránku</a>
     </div>
 
     <div class="footer-text">
