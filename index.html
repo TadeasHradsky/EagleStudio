@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #0b0f19;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Světelný efekt na pozadí pro Dark Blur style */
+.background-glow {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.4) 0%, rgba(0, 0, 0, 0) 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(80px);
+  z-index: 0;
+}
+
+/* Kartička přihlášení s rozostřením (Glassmorphism) */
+.login-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(18, 26, 43, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 210, 255, 0.2);
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.logo h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.logo h1 span {
+  color: #00d2ff;
+  text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+}
+
+.logo p {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
+/* Tlačítka */
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: #00d2ff;
+  color: #0b0f19;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+}
+
+.btn-primary:hover {
+  background: #80e8ff;
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  margin-top: 15px;
+  padding: 8px 16px;
+  background: transparent;
+  color: #ff4d4d;
+  border: 1px solid #ff4d4d;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-secondary:hover {
+  background: #ff4d4d;
+  color: #fff;
+}
+
+.user-info p {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.hidden {
+  display: none;
+}
