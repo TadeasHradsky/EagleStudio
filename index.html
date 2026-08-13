@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="https://unpkg.com/gotrue-js@latest/dist/gotrue.js"></script>
 
   <style>
     /* Reset a základní nastavení */
@@ -34,8 +34,8 @@
     /* Tmavý blur a světelné efekty na pozadí */
     .glow-bg-1 {
       position: absolute;
-      width: 400px;
-      height: 400px;
+      width: 450px;
+      height: 450px;
       background: radial-gradient(circle, rgba(0, 210, 255, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
       top: 30%;
       left: 50%;
@@ -46,37 +46,41 @@
 
     .glow-bg-2 {
       position: absolute;
-      width: 300px;
-      height: 300px;
+      width: 350px;
+      height: 350px;
       background: radial-gradient(circle, rgba(0, 150, 255, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
-      bottom: 20%;
-      right: 30%;
+      bottom: 15%;
+      right: 25%;
       filter: blur(80px);
       z-index: 0;
     }
 
-    /* Hlavní kartička v přihlašovacím okně (Glassmorphism / Dark Blur) */
+    /* Kartička (Glassmorphism / Dark Blur) */
     .login-card {
       position: relative;
       z-index: 1;
-      background: rgba(15, 23, 42, 0.6);
+      background: rgba(15, 23, 42, 0.65);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(0, 210, 255, 0.25);
       border-radius: 24px;
-      padding: 48px 40px;
+      padding: 40px;
       width: 100%;
       max-width: 420px;
-      text-align: center;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6),
                   inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    /* Logo a nadpisy */
+    /* Logo a hlavička */
+    .logo-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
     .logo-icon {
       width: 50px;
       height: 50px;
-      margin: 0 auto 15px auto;
+      margin: 0 auto 12px auto;
       background: rgba(0, 210, 255, 0.1);
       border: 1px solid rgba(0, 210, 255, 0.3);
       border-radius: 50%;
@@ -92,43 +96,98 @@
       fill: #00d2ff;
     }
 
-    .logo h1 {
+    .logo-header h1 {
       font-size: 1.8rem;
       font-weight: 700;
       letter-spacing: 2px;
-      color: #ffffff;
       text-transform: uppercase;
     }
 
-    .logo h1 span {
+    .logo-header h1 span {
       color: #00d2ff;
       text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
     }
 
-    .logo p {
+    .logo-header p {
       font-size: 0.85rem;
       color: #94a3b8;
-      margin-top: 6px;
-      margin-bottom: 32px;
+      margin-top: 4px;
+    }
+
+    /* Prepínač záložek (Tabs) */
+    .tab-toggle {
+      display: flex;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn.active {
+      background: rgba(0, 210, 255, 0.2);
+      color: #00d2ff;
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
+    }
+
+    /* Vstupní pole (Inputs) */
+    .input-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      margin-bottom: 6px;
+      margin-left: 2px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(8, 12, 20, 0.6);
+      border: 1px solid rgba(0, 210, 255, 0.2);
+      border-radius: 10px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .input-group input:focus {
+      border-color: #00d2ff;
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.3);
     }
 
     /* Tlačítka */
     .btn-primary {
       width: 100%;
-      padding: 14px 20px;
+      padding: 14px;
       background: #00d2ff;
       color: #060911;
       border: none;
-      border-radius: 12px;
+      border-radius: 10px;
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 0 20px rgba(0, 210, 255, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
+      margin-top: 10px;
     }
 
     .btn-primary:hover {
@@ -137,11 +196,7 @@
       transform: translateY(-2px);
     }
 
-    .btn-primary:active {
-      transform: translateY(0);
-    }
-
-    .btn-secondary {
+    .btn-danger {
       margin-top: 15px;
       padding: 10px 20px;
       background: rgba(255, 77, 77, 0.1);
@@ -152,43 +207,51 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
+      width: 100%;
     }
 
-    .btn-secondary:hover {
+    .btn-danger:hover {
       background: #ff4d4d;
       color: #ffffff;
       box-shadow: 0 0 15px rgba(255, 77, 77, 0.4);
     }
 
-    /* Přihlášený uživatel */
-    .user-info {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: 20px;
-      margin-top: 10px;
+    /* Chybové a stavové zprávy */
+    .message-box {
+      font-size: 0.85rem;
+      margin-top: 15px;
+      text-align: center;
+      min-height: 20px;
+    }
+    .message-box.error { color: #ff5c5c; }
+    .message-box.success { color: #00d2ff; }
+
+    /* Profil uživatele po přihlášení */
+    .user-profile {
+      text-align: center;
     }
 
-    .user-info p {
-      font-size: 0.95rem;
+    .user-profile p {
+      font-size: 1rem;
       color: #cbd5e1;
-      margin-bottom: 12px;
+      margin-bottom: 20px;
     }
 
-    .user-info strong {
+    .user-profile strong {
       color: #00d2ff;
+      display: block;
+      font-size: 1.1rem;
+      margin-top: 5px;
     }
 
-    /* Skrytí prvků */
-    .hidden {
-      display: none !important;
-    }
-
-    /* Zápatí karty */
+    /* Pomocné třídy */
+    .hidden { display: none !important; }
+    
     .footer-text {
       margin-top: 25px;
       font-size: 0.75rem;
       color: #64748b;
+      text-align: center;
     }
   </style>
 </head>
@@ -199,26 +262,52 @@
 
   <div class="login-card">
     
-    <div class="logo-icon">
-      <svg viewBox="0 0 24 24">
-        <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4h-2l2 4h-3l-2-4H7L5 8H2v12h20V4h-4zM8 17l6-5-6-5v10z"/>
-      </svg>
-    </div>
-
-    <div class="logo">
+    <div class="logo-header">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4h-2l2 4h-3l-2-4H7L5 8H2v12h20V4h-4zM8 17l6-5-6-5v10z"/>
+        </svg>
+      </div>
       <h1>EAGLE <span>STUDIO</span></h1>
-      <p>Vstupte do světa filmů a seriálů</p>
+      <p>Filmy a seriály v prémiové kvalitě</p>
     </div>
 
-    <div id="auth-buttons">
-      <button class="btn-primary" onclick="netlifyIdentity.open()">
-        <span>Přihlásit se / Registrovat</span>
-      </button>
+    <div id="auth-container">
+      <div class="tab-toggle">
+        <button id="tab-login" class="tab-btn active" onclick="switchTab('login')">Přihlášení</button>
+        <button id="tab-signup" class="tab-btn" onclick="switchTab('signup')">Registrace</button>
+      </div>
+
+      <form id="form-login" onsubmit="handleLogin(event)">
+        <div class="input-group">
+          <label for="login-email">E-mail</label>
+          <input type="email" id="login-email" placeholder="vas@email.cz" required>
+        </div>
+        <div class="input-group">
+          <label for="login-password">Heslo</label>
+          <input type="password" id="login-password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-primary">Vstoupit do studia</button>
+      </form>
+
+      <form id="form-signup" class="hidden" onsubmit="handleSignup(event)">
+        <div class="input-group">
+          <label for="signup-email">E-mail</label>
+          <input type="email" id="signup-email" placeholder="vas@email.cz" required>
+        </div>
+        <div class="input-group">
+          <label for="signup-password">Heslo</label>
+          <input type="password" id="signup-password" placeholder="Minimálně 6 znaků" minlength="6" required>
+        </div>
+        <button type="submit" class="btn-primary">Vytvořit účet</button>
+      </form>
+
+      <div id="message-box" class="message-box"></div>
     </div>
 
-    <div id="user-info" class="user-info hidden">
-      <p>Vítejte zpět,<br><strong id="user-email"></strong></p>
-      <button class="btn-secondary" onclick="netlifyIdentity.logout()">Odhlásit se</button>
+    <div id="user-profile" class="user-profile hidden">
+      <p>Jste úspěšně přihlášeni jako:<strong id="user-email-display"></strong></p>
+      <button class="btn-danger" onclick="handleLogout()">Odhlásit se</button>
     </div>
 
     <div class="footer-text">
@@ -227,38 +316,110 @@
   </div>
 
   <script>
-    // Správa stavu přihlášení po načtení
-    netlifyIdentity.on('init', user => {
-      updateUserUI(user);
+    // 1. Inicializace Netlify GoTrue API
+    // Výměna domény za vaši z Netlify (např. https://eagle-studio.netlify.app)
+    const auth = new GoTrue({
+      APIUrl: `${window.location.origin}/.netlify/identity`,
+      setCookie: true
     });
 
-    // Po úspěšném přihlášení
-    netlifyIdentity.on('login', user => {
-      updateUserUI(user);
-      netlifyIdentity.close(); // Zavře vyskakovací okno
+    // Kontrola, zda už je uživatel přihlášený při načtení stránky
+    document.addEventListener("DOMContentLoaded", () => {
+      const currentUser = auth.currentUser();
+      if (currentUser) {
+        showLoggedInState(currentUser);
+      }
     });
 
-    // Po odhlášení
-    netlifyIdentity.on('logout', () => {
-      updateUserUI(null);
-    });
+    // Přepínání mezi záložkami Přihlášení / Registrace
+    function switchTab(tab) {
+      clearMessage();
+      const loginForm = document.getElementById('form-login');
+      const signupForm = document.getElementById('form-signup');
+      const tabLogin = document.getElementById('tab-login');
+      const tabSignup = document.getElementById('tab-signup');
 
-    // Funkce na přepínání viditelnosti tlačítka a uživatelského profilu
-    function updateUserUI(user) {
-      const userInfo = document.getElementById('user-info');
-      const userEmail = document.getElementById('user-email');
-      const authButtons = document.getElementById('auth-buttons');
-
-      if (user) {
-        userEmail.innerText = user.email;
-        userInfo.classList.remove('hidden');
-        authButtons.classList.add('hidden');
+      if (tab === 'login') {
+        loginForm.classList.remove('hidden');
+        signupForm.classList.add('hidden');
+        tabLogin.classList.add('active');
+        tabSignup.classList.remove('active');
       } else {
-        userInfo.classList.add('hidden');
-        authButtons.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+        signupForm.classList.remove('hidden');
+        tabLogin.classList.remove('active');
+        tabSignup.classList.add('active');
       }
     }
-  </script>
 
+    // Zpracování Přihlášení
+    function handleLogin(e) {
+      e.preventDefault();
+      clearMessage();
+
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+
+      auth.login(email, password, true)
+        .then(response => {
+          showMessage("Přihlášení úspěšné!", "success");
+          setTimeout(() => showLoggedInState(response), 1000);
+        })
+        .catch(error => {
+          showMessage("Chybný e-mail nebo heslo.", "error");
+          console.error("Login Error:", error);
+        });
+    }
+
+    // Zpracování Registrace
+    function handleSignup(e) {
+      e.preventDefault();
+      clearMessage();
+
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+
+      auth.signup(email, password)
+        .then(() => {
+          showMessage("Registrace proběhla! Zkontrolujte e-mail pro potvrzení.", "success");
+        })
+        .catch(error => {
+          showMessage(error.message || "Chyba při registraci.", "error");
+          console.error("Signup Error:", error);
+        });
+    }
+
+    // Zpracování Odhlášení
+    function handleLogout() {
+      const user = auth.currentUser();
+      if (user) {
+        user.logout().then(() => {
+          document.getElementById('auth-container').classList.remove('hidden');
+          document.getElementById('user-profile').classList.add('hidden');
+          showMessage("Byli jste odhlášeni.", "success");
+        });
+      }
+    }
+
+    // Zobrazení přihlášeného stavu
+    function showLoggedInState(user) {
+      document.getElementById('auth-container').classList.add('hidden');
+      document.getElementById('user-profile').classList.remove('hidden');
+      document.getElementById('user-email-display').innerText = user.email;
+    }
+
+    // Pomocné funkce pro zprávy
+    function showMessage(msg, type) {
+      const box = document.getElementById('message-box');
+      box.innerText = msg;
+      box.className = `message-box ${type}`;
+    }
+
+    function clearMessage() {
+      const box = document.getElementById('message-box');
+      box.innerText = "";
+      box.className = "message-box";
+    }
+  </script>
 </body>
 </html>
