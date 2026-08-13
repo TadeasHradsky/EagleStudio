@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EAGLE STUDIO — Filmy a Seriály</title>
+  <title>EAGLE STUDIO — Sledujte filmy a seriály</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,12 +26,12 @@
       overflow-x: hidden;
     }
 
-    /* --- NAVIGACE --- */
+    /* --- Navigace --- */
     navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 8%;
+      padding: 20px 8%;
       background: rgba(8, 12, 20, 0.85);
       backdrop-filter: blur(15px);
       position: fixed;
@@ -53,7 +53,6 @@
       text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
     }
 
-    /* Tlačítko přihlášení (před přihlášením) */
     .nav-btn {
       padding: 10px 24px;
       background: #00d2ff;
@@ -63,6 +62,8 @@
       border-radius: 10px;
       transition: all 0.3s ease;
       box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+      cursor: pointer;
+      border: none;
     }
 
     .nav-btn:hover {
@@ -71,17 +72,15 @@
       transform: translateY(-2px);
     }
 
-    /* Profil uživatele v navigaci (po přihlášení) */
-    .user-nav-profile {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    /* --- Ikonka účtu po přihlášení --- */
+    .user-menu-container {
+      position: relative;
     }
 
-    .avatar-circle {
-      width: 42px;
-      height: 42px;
-      background: linear-gradient(135deg, #00d2ff, #0072ff);
+    .user-avatar {
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, #00d2ff, #0066ff);
       color: #080c14;
       font-weight: 700;
       font-size: 1.2rem;
@@ -89,34 +88,61 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 12px rgba(0, 210, 255, 0.5);
-      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.2s ease;
     }
 
-    .user-name-text {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: #e2e8f0;
+    .user-avatar:hover {
+      transform: scale(1.08);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      right: 0;
+      top: 55px;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 210, 255, 0.25);
+      border-radius: 14px;
+      padding: 15px;
+      width: 200px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .dropdown-menu.show {
+      display: flex;
+    }
+
+    .dropdown-user-name {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 8px;
+      word-break: break-all;
     }
 
     .logout-btn {
-      background: transparent;
-      border: 1px solid rgba(255, 77, 77, 0.4);
+      background: rgba(255, 77, 77, 0.15);
       color: #ff5c5c;
-      padding: 6px 12px;
+      border: 1px solid rgba(255, 77, 77, 0.3);
+      padding: 8px;
       border-radius: 8px;
-      font-size: 0.8rem;
       cursor: pointer;
-      margin-left: 10px;
-      transition: all 0.3s ease;
+      font-weight: 600;
+      transition: 0.2s;
     }
 
     .logout-btn:hover {
       background: #ff4d4d;
-      color: #fff;
+      color: white;
     }
 
-    /* --- POHLED PRO NEPŘIHLÁŠENÉ (LANDING) --- */
+    /* --- Hero Sekce (Návštěvník) --- */
     .hero {
       position: relative;
       padding: 160px 8% 80px 8%;
@@ -145,7 +171,9 @@
       margin-bottom: 20px;
     }
 
-    .hero h2 span { color: #00d2ff; }
+    .hero h2 span {
+      color: #00d2ff;
+    }
 
     .hero p {
       color: #94a3b8;
@@ -154,73 +182,50 @@
       margin-bottom: 35px;
     }
 
-    .features {
-      padding: 40px 8% 80px 8%;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
+    /* --- Dashboard Sekce (Přihlášený uživatel) --- */
+    .user-welcome-panel {
+      padding: 140px 8% 40px 8%;
+      text-align: left;
     }
 
-    .feature-card {
-      background: rgba(15, 23, 42, 0.5);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(0, 210, 255, 0.15);
-      border-radius: 18px;
-      padding: 30px;
-      text-align: center;
-    }
-
-    .feature-card h3 { color: #00d2ff; margin: 10px 0; }
-    .feature-card p { color: #94a3b8; font-size: 0.9rem; }
-
-    /* --- POHLED PRO PŘIHLÁŠENÉ (CATALOG) --- */
-    .dashboard {
-      padding: 130px 8% 80px 8%;
-    }
-
-    .welcome-panel {
-      background: linear-gradient(135deg, rgba(0, 210, 255, 0.15) 0%, rgba(15, 23, 42, 0.6) 100%);
-      border: 1px solid rgba(0, 210, 255, 0.3);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      padding: 40px;
-      margin-bottom: 50px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .welcome-panel h2 {
-      font-size: 2.2rem;
+    .user-welcome-panel h2 {
+      font-size: 2.4rem;
       margin-bottom: 10px;
     }
 
-    .welcome-panel h2 span {
+    .user-welcome-panel h2 span {
       color: #00d2ff;
-      text-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+      text-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
     }
 
-    .welcome-panel p {
-      color: #cbd5e1;
+    .user-welcome-panel p {
+      color: #94a3b8;
       font-size: 1rem;
     }
 
-    /* Filmové sekce a Karty */
+    /* --- Grid Filmů --- */
+    .movies-section {
+      padding: 40px 8% 80px 8%;
+    }
+
     .section-title {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      border-left: 4px solid #00d2ff;
-      padding-left: 12px;
+      font-size: 1.6rem;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .movie-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 25px;
-      margin-bottom: 50px;
     }
 
     .movie-card {
       position: relative;
       background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(10px);
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -230,5 +235,234 @@
       justify-content: flex-end;
       padding: 20px;
       transition: all 0.3s ease;
-      cursor: pointer;
     }
+
+    .movie-card:hover {
+      border-color: #00d2ff;
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.35);
+      transform: translateY(-5px);
+    }
+
+    /* Ukázkové barevné obaly */
+    .m1 { background: linear-gradient(180deg, transparent 30%, rgba(8,12,20,0.95)), #1e293b; }
+    .m2 { background: linear-gradient(180deg, transparent 30%, rgba(8,12,20,0.95)), #0f172a; }
+    .m3 { background: linear-gradient(180deg, transparent 30%, rgba(8,12,20,0.95)), #111827; }
+    .m4 { background: linear-gradient(180deg, transparent 30%, rgba(8,12,20,0.95)), #1e1b4b; }
+    .m5 { background: linear-gradient(180deg, transparent 30%, rgba(8,12,20,0.95)), #31102b; }
+    .m6 { background: linear-gradient(180deg, transparent 30%, rgba(8,12,20,0.95)), #064e3b; }
+
+    .movie-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+
+    .movie-meta {
+      font-size: 0.75rem;
+      color: #00d2ff;
+      margin-bottom: 12px;
+    }
+
+    .play-btn {
+      padding: 8px 15px;
+      background: #00d2ff;
+      color: #080c14;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .play-btn:hover {
+      background: #5ee2ff;
+      box-shadow: 0 0 10px rgba(0,210,255,0.5);
+    }
+
+    /* Sekce výhod */
+    .features {
+      padding: 40px 8% 80px 8%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(0, 210, 255, 0.15);
+      border-radius: 16px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .feature-card h3 { color: #00d2ff; margin: 10px 0 5px 0; }
+    .feature-card p { color: #94a3b8; font-size: 0.85rem; }
+
+    /* Pomocná třída pro skrývání prvků */
+    .hidden { display: none !important; }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #64748b;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <navbar>
+    <div class="logo">
+      <h1>EAGLE <span>STUDIO</span></h1>
+    </div>
+
+    <a href="login.html" id="nav-login-btn" class="nav-btn">Přihlásit se</a>
+
+    <div id="nav-user-menu" class="user-menu-container hidden">
+      <div class="user-avatar" id="user-avatar" onclick="toggleDropdown()">?</div>
+      <div class="dropdown-menu" id="dropdown-menu">
+        <div class="dropdown-user-name" id="dropdown-email">email@domain.com</div>
+        <button class="logout-btn" onclick="netlifyIdentity.logout()">Odhlásit se</button>
+      </div>
+    </div>
+  </navbar>
+
+  <div class="glow-bg"></div>
+
+  <div id="guest-view">
+    <section class="hero">
+      <h2>Tisíce filmů a seriálů. <br><span>100% zdarma bez poplatků.</span></h2>
+      <p>Sledujte nejnovější trháky, klasické snímky i seriálové hity kdykoliv a kdekoliv. Stačí se zdarma zaregistrovat.</p>
+      <a href="login.html" class="nav-btn" style="padding: 16px 36px; font-size: 1.1rem;">Spustit sledování zdarma</a>
+    </section>
+
+    <section class="features">
+      <div class="feature-card">
+        <h3>💎 Zcela Zdarma</h3>
+        <p>Žádné měsíční poplatky. Vše dostupné ihned.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🎬 4K Kvalita</h3>
+        <p>Křišťálově čistý obraz na každém zařízení.</p>
+      </div>
+      <div class="feature-card">
+        <h3>⚡ Bez Reklam</h3>
+        <p>Plynulé přehrávání bez vyrušování.</p>
+      </div>
+    </section>
+  </div>
+
+
+  <div id="user-view" class="hidden">
+    <section class="user-welcome-panel">
+      <h2>Vítejte zpět, <span id="welcome-name">Uživateli</span>!</h2>
+      <p>Vyberte si film a užijte si ničím nerušený zážitek v EAGLE STUDIO.</p>
+    </section>
+
+    <section class="movies-section">
+      <h3 class="section-title">🔥 Doporučené Trháky</h3>
+      <div class="movie-grid">
+        
+        <div class="movie-card m1">
+          <div class="movie-title">Cyberverse 2099</div>
+          <div class="movie-meta">Sci-Fi • 4K • 2h 15m</div>
+          <button class="play-btn">▶ Přehrát film</button>
+        </div>
+
+        <div class="movie-card m2">
+          <div class="movie-title">Temný Horizont</div>
+          <div class="movie-meta">Akční • 4K • 1h 50m</div>
+          <button class="play-btn">▶ Přehrát film</button>
+        </div>
+
+        <div class="movie-card m3">
+          <div class="movie-title">Poslední Nájezdník</div>
+          <div class="movie-meta">Dobrodružný • HD • 2h 05m</div>
+          <button class="play-btn">▶ Přehrát film</button>
+        </div>
+
+        <div class="movie-card m4">
+          <div class="movie-title">Ztracené Město</div>
+          <div class="movie-meta">Mysteriózní • 4K • 1h 42m</div>
+          <button class="play-btn">▶ Přehrát film</button>
+        </div>
+
+        <div class="movie-card m5">
+          <div class="movie-title">Noc V Metropoli</div>
+          <div class="movie-meta">Thriller • 4K • 2h 10m</div>
+          <button class="play-btn">▶ Přehrát film</button>
+        </div>
+
+        <div class="movie-card m6">
+          <div class="movie-title">Za Hranicí Snov</div>
+          <div class="movie-meta">Fantasy • HD • 1h 58m</div>
+          <button class="play-btn">▶ Přehrát film</button>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    &copy; EAGLE STUDIO. Všechna práva vyhrazena.
+  </footer>
+
+  <script>
+    // Inicializace Netlify Identity
+    netlifyIdentity.on('init', user => updateUserState(user));
+    netlifyIdentity.on('login', user => updateUserState(user));
+    netlifyIdentity.on('logout', () => updateUserState(null));
+
+    function updateUserState(user) {
+      const guestView = document.getElementById('guest-view');
+      const userView = document.getElementById('user-view');
+      const navLoginBtn = document.getElementById('nav-login-btn');
+      const navUserMenu = document.getElementById('nav-user-menu');
+      const welcomeName = document.getElementById('welcome-name');
+      const userAvatar = document.getElementById('user-avatar');
+      const dropdownEmail = document.getElementById('dropdown-email');
+
+      if (user) {
+        // Uživatel JE přihlášen
+        const name = user.user_metadata.full_name || user.email.split('@')[0];
+        const firstLetter = name.charAt(0).toUpperCase();
+
+        // Aktualizace dat v UI
+        welcomeName.innerText = name;
+        userAvatar.innerText = firstLetter;
+        dropdownEmail.innerText = user.email;
+
+        // Přepnutí viditelnosti
+        guestView.classList.add('hidden');
+        userView.classList.remove('hidden');
+        navLoginBtn.classList.add('hidden');
+        navUserMenu.classList.remove('hidden');
+      } else {
+        // Uživatel NENÍ přihlášen
+        guestView.classList.remove('hidden');
+        userView.classList.add('hidden');
+        navLoginBtn.classList.remove('hidden');
+        navUserMenu.classList.add('hidden');
+      }
+    }
+
+    // Funkce pro rozbalení/schování menu profilu
+    function toggleDropdown() {
+      const dropdown = document.getElementById('dropdown-menu');
+      dropdown.classList.toggle('show');
+    }
+
+    // Zavřít rozbalovací menu při kliknutí mimo něj
+    window.onclick = function(event) {
+      if (!event.target.matches('#user-avatar')) {
+        const dropdown = document.getElementById('dropdown-menu');
+        if (dropdown.classList.contains('show')) {
+          dropdown.classList.remove('show');
+        }
+      }
+    }
+  </script>
+</body>
+</html>
